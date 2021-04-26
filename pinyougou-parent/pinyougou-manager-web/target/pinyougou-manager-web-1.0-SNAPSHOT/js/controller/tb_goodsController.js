@@ -1,5 +1,5 @@
  //控制层 
-app.controller('tb_goodsController' ,function($scope,$controller   ,tb_goodsService){	
+app.controller('tb_goodsController' ,function($scope,$controller , $location, tb_type_templateService, tb_item_catService, uploadService ,tb_goodsService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -13,24 +13,58 @@ app.controller('tb_goodsController' ,function($scope,$controller   ,tb_goodsServ
 	}    
 	
 	//分页
-	$scope.findPage=function(page,rows){			
-		tb_goodsService.findPage(page,rows).success(
-			function(response){
-				$scope.list=response.rows;	
-				$scope.paginationConf.totalItems=response.total;//更新总记录数
-			}			
+	// $scope.findPage=function(page,rows){
+	// 	tb_goodsService.findPage(page,rows).success(
+	// 		function(response){
+	// 			$scope.list=response.rows;
+	// 			$scope.paginationConf.totalItems=response.total;//更新总记录数
+	// 		}
+	// 	);
+	// }
+	//分页
+	$scope.findPage = function (page, rows) {
+		tb_goodsService.search($scope.searchEntity, page, rows).success(
+			function (response) {
+				$scope.list = response.rows;
+				$scope.paginationConf.totalItems = response.total;//更新总记录数
+			}
 		);
 	}
-	
-	//查询实体 
-	$scope.findOne=function(id){				
-		tb_goodsService.findOne(id).success(
-			function(response){
-				$scope.entity= response;					
-			}
-		);				
+	$scope.selectItemCat1List = function () {
+		tb_item_catService.findByParentId(0).success(function (res) {
+			$scope.itemCat1List = res
+		})
 	}
-	
+	// //查询实体
+	// $scope.findOne=function(id){
+	// 	tb_goodsService.findOne(id).success(
+	// 		function(response){
+	// 			$scope.entity= response;
+	// 		}
+	// 	);
+	// }
+	//查询实体
+	$scope.entity = {goodsDesc: {itemImages: [], specificationItems: []}}
+	$scope.findOne = function () {
+		let id = $location.search()["id"]
+		if (id === null) {
+			return
+		}
+		tb_goodsService.findOne(id).success(
+			function (response) {
+				$scope.entity = response;
+				//商品介绍
+				editor.html($scope.entity.goodsDesc.introduction)
+				//商品图片
+				$scope.entity.goodsDesc.itemImages = JSON.parse($scope.entity.goodsDesc.itemImages)
+				$scope.entity.goodsDesc.customAttributeItems = JSON.parse($scope.entity.goodsDesc.customAttributeItems)
+				$scope.entity.goodsDesc.specificationItems = JSON.parse($scope.entity.goodsDesc.specificationItems)
+				for (let i = 0; i < $scope.entity.itemList.length; i++) {
+					$scope.entity.itemList[i].spec = JSON.parse($scope.entity.itemList[i].spec)
+				}
+			}
+		);
+	}
 	//保存 
 	$scope.save=function(){				
 		var serviceObject;//服务层对象  				
@@ -63,5 +97,24 @@ app.controller('tb_goodsController' ,function($scope,$controller   ,tb_goodsServ
 			}		
 		);				
 	}
-    
+	$scope.aduitStatus = ["未审核", "已审核", "审核未通过", "已关闭"]
+	$scope.itemCatList = []
+	$scope.findItemCatList = function () {
+		tb_item_catService.findAll().success(function (res) {
+			for (let i = 0; i < res.length; i++) {
+				$scope.itemCatList[res[i].id] = res[i].name
+			}
+		})
+	}
+	$scope.updateStatus=function (status) {
+		tb_goodsService.updateStatus($scope.selectIds,status).success(function (res) {
+			if(res.success){
+				$scope.reloadList()
+				$scope.selectIds=[]
+			}else{
+
+				alert(res.message)
+			}
+		})
+	}
 });	

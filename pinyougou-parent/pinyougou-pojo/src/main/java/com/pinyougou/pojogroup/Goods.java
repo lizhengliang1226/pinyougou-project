@@ -2,9 +2,11 @@ package com.pinyougou.pojogroup;
 
 import com.pinyougou.pojo.TbGoods;
 import com.pinyougou.pojo.TbGoodsDesc;
+import com.pinyougou.pojo.TbItem;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Description
@@ -15,4 +17,5 @@ import java.io.Serializable;
 public class Goods implements Serializable {
     private TbGoods goods;
     private TbGoodsDesc goodsDesc;
+    private List<TbItem> itemList;
 }

@@ -35,7 +35,7 @@ public interface GoodsService {
 	/**
 	 * 修改
 	 */
-	public void update(TbGoods tbGoods);
+	public void update(Goods tbGoods);
 	
 
 	/**
@@ -43,7 +43,7 @@ public interface GoodsService {
 	 * @param id
 	 * @return
 	 */
-	public TbGoods findOne(Long id);
+	public Goods findOne(Long id);
 	
 	
 	/**
@@ -51,5 +51,20 @@ public interface GoodsService {
 	 * @param ids
 	 */
 	public void delete(Long [] ids);
+	/**
+	 * 返回分页列表
+	 * @return
+	 */
+	public PageResult findPage(TbGoods tbGoods,int pageNum, int pageSize);
 
+	/**
+	 * 批量更新状态
+	 * @param ids
+	 */
+	public void updateStatus(Long[] ids,String status);
+	/**
+	 * 批量更新上下架状态
+	 * @param ids
+	 */
+	public void updateMarkStatus(Long[] ids,String status);
 }

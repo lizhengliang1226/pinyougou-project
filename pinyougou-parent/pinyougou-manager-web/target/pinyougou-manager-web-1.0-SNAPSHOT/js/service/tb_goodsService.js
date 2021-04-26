@@ -25,5 +25,10 @@ app.service('tb_goodsService',function($http){
 	this.dele=function(ids){
 		return $http.get('../tb_goods/delete.do?ids='+ids);
 	}
-	    	
+	this.search=function (entity,page,rows){
+		return $http.post("../tb_goods/search?page="+page+"&rows="+rows,entity);
+	}
+	this.updateStatus=function (ids,status) {
+		return $http.get("../tb_goods/updateStatus?ids="+ids+"&status="+status)
+	}
 });

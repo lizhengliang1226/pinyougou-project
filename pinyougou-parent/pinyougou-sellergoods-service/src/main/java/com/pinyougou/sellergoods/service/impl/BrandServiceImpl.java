@@ -11,6 +11,7 @@ import com.pinyougou.pojo.TbBrand;
 import com.pinyougou.pojo.TbBrandExample;
 import com.pinyougou.sellergoods.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ import java.util.Map;
  * @Author LZL
  * @Date 2021.04.16-16:33
  */
+@Transactional
 @Service
 public class BrandServiceImpl implements BrandService {
 

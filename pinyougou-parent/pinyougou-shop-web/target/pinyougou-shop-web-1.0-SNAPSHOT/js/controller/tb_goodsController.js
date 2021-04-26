@@ -1,5 +1,5 @@
 //控制层
-app.controller('tb_goodsController', function ($scope, $controller, tb_type_templateService, tb_item_catService, uploadService, tb_goodsService) {
+app.controller('tb_goodsController', function ($scope, $controller, $location, tb_type_templateService, tb_item_catService, uploadService, tb_goodsService) {
 
     $controller('baseController', {$scope: $scope});//继承
     $scope.imgEntity = {}
@@ -34,12 +34,25 @@ app.controller('tb_goodsController', function ($scope, $controller, tb_type_temp
         tb_type_templateService.findOne(newValue).success(function (res) {
             $scope.typeTemplate = res
             $scope.typeTemplate.brandIds = JSON.parse($scope.typeTemplate.brandIds)
-            $scope.entity.goodsDesc.customAttributeItems = JSON.parse($scope.typeTemplate.customAttributeItems)
+            if ($location.search()["id"] == null) {
+                $scope.entity.goodsDesc.customAttributeItems = JSON.parse($scope.typeTemplate.customAttributeItems)
+            }
         })
         tb_type_templateService.findSpecList(newValue).success(function (res) {
             $scope.specList = res
         })
     })
+    $scope.checkAttributeValue = function (name, value) {
+        let obj = $scope.searchObjectByKey($scope.entity.goodsDesc.specificationItems, "name", name)
+        if (obj == null) {
+            return false;
+        } else {
+            if (obj.values.indexOf(value) === -1) {
+                return false
+            }
+        }
+        return true;
+    }
     $scope.deleteImg = function (index) {
         $scope.entity.goodsDesc.itemImages.splice(index, 1);
     }
@@ -55,22 +68,42 @@ app.controller('tb_goodsController', function ($scope, $controller, tb_type_temp
             }
         );
     }
-
+    $scope.aduitStatus = ["未审核", "已审核", "审核未通过", "已关闭"]
     //分页
     $scope.findPage = function (page, rows) {
-        tb_goodsService.findPage(page, rows).success(
+        tb_goodsService.search($scope.searchEntity, page, rows).success(
             function (response) {
                 $scope.list = response.rows;
                 $scope.paginationConf.totalItems = response.total;//更新总记录数
             }
         );
     }
-
+    $scope.search = function (page, rows) {
+        tb_goodsService.search($scope.searchEntity, page, rows).success(
+            function (response) {
+                $scope.list = response.rows;
+                $scope.paginationConf.totalItems = response.total;//更新总记录数
+            }
+        );
+    }
     //查询实体
-    $scope.findOne = function (id) {
+    $scope.findOne = function () {
+        let id = $location.search()["id"]
+        if (id === null) {
+            return
+        }
         tb_goodsService.findOne(id).success(
             function (response) {
                 $scope.entity = response;
+                //商品介绍
+                editor.html($scope.entity.goodsDesc.introduction)
+                //商品图片
+                $scope.entity.goodsDesc.itemImages = JSON.parse($scope.entity.goodsDesc.itemImages)
+                $scope.entity.goodsDesc.customAttributeItems = JSON.parse($scope.entity.goodsDesc.customAttributeItems)
+                $scope.entity.goodsDesc.specificationItems = JSON.parse($scope.entity.goodsDesc.specificationItems)
+                for (let i = 0; i < $scope.entity.itemList.length; i++) {
+                    $scope.entity.itemList[i].spec = JSON.parse($scope.entity.itemList[i].spec)
+                }
             }
         );
     }
@@ -78,15 +111,21 @@ app.controller('tb_goodsController', function ($scope, $controller, tb_type_temp
     //保存
     $scope.save = function () {
         $scope.entity.goodsDesc.introduction = editor.html();//获取商品介绍
-        tb_goodsService.add($scope.entity).success(
+        let serviceObj;
+        if ($scope.entity.goods.id != null) {
+            serviceObj = tb_goodsService.update($scope.entity)
+        } else {
+            serviceObj = tb_goodsService.add($scope.entity)
+        }
+        serviceObj.success(
             function (response) {
                 alert(response.message);
                 if (response.success) {
-                    $scope.entity = {}
-                    editor.html("");
+                   location.href='goods.html'
                 }
             }
         );
+
     }
 
 
@@ -121,7 +160,7 @@ app.controller('tb_goodsController', function ($scope, $controller, tb_type_temp
         $scope.entity.itemList = [{spec: {}, price: 0, num: 100, status: "1", isDefault: "0"}]
         let items = $scope.entity.goodsDesc.specificationItems
         for (let i = 0; i < items.length; i++) {
-            $scope.entity.itemList=addColumn( $scope.entity.itemList,items[i].name,items[i].values)
+            $scope.entity.itemList = addColumn($scope.entity.itemList, items[i].name, items[i].values)
         }
 
 
@@ -137,5 +176,13 @@ app.controller('tb_goodsController', function ($scope, $controller, tb_type_temp
             }
         }
         return newList
+    }
+    $scope.itemCatList = []
+    $scope.findItemCatList = function () {
+        tb_item_catService.findAll().success(function (res) {
+            for (let i = 0; i < res.length; i++) {
+                $scope.itemCatList[res[i].id] = res[i].name
+            }
+        })
     }
 });	

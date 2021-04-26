@@ -35,7 +35,7 @@
     
 </head>
 
-<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="tb_goodsController" ng-init="selectItemCat1List()" >
+<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="tb_goodsController" ng-init="selectItemCat1List();findOne()" >
 
             <!-- 正文区域 -->
             <section class="content">
@@ -186,7 +186,7 @@
                             	<div class="row data-type">
 	                            	<div class="col-md-2 title">是否启用规格</div>
 			                        <div class="col-md-10 data">
-			                        	<input type="checkbox" >			                           
+			                        	<input type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="entity.goods.isEnableSpec" >
 			                        </div>
                             	</div>
                             	<p>
@@ -201,13 +201,14 @@
 			                                <div class="col-md-2 title">{{x.text}}</div>
 					                        <div class="col-md-10 data">
 					                            <span ng-repeat="y in x.options">
-					                            	<input  type="checkbox" ng-click="updateSpecItems($event,x.text,y.optionName);createItemList()" >{{y.optionName}}
+					                            	<input  ng-checked="checkAttributeValue(x.text,y.optionName)"
+															type="checkbox" ng-click="updateSpecItems($event,x.text,y.optionName);createItemList()" >{{y.optionName}}
 					                            </span>
 					                        </div>
 		                                </div>  
 		                                                                                  
 	                                </div>
-	
+<!--										{{entity}}-->
 	                                
 	                                <div class="row data-type">
 	                                	 <table class="table table-bordered table-striped table-hover dataTable">
@@ -221,6 +222,7 @@
 											    </tr>
 								            </thead>
 						                    <tbody>
+
 											  <tr ng-repeat="x in entity.itemList">
 													<td ng-repeat="y in entity.goodsDesc.specificationItems ">
 										            	{{x.spec[y.name]}}
@@ -258,7 +260,7 @@
                    </div>
                   <div class="btn-toolbar list-toolbar">
 				      <button ng-click="save()" class="btn btn-primary" ><i class="fa fa-save"></i>保存</button>
-				      <button class="btn btn-default" >返回列表</button>
+				      <a href="goods.html" class="btn btn-default" >返回列表</a>
 
 				  </div>
 			
