@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="dubboxdemo-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="dubbo" target="1.6" />
+      <module name="dubbo-admin" target="1.6" />
+      <module name="dubbo-cluster" target="1.6" />
+      <module name="dubbo-common" target="1.6" />
+      <module name="dubbo-config" target="1.5" />
+      <module name="dubbo-config-api" target="1.6" />
+      <module name="dubbo-config-spring" target="1.6" />
+      <module name="dubbo-container" target="1.5" />
+      <module name="dubbo-container-api" target="1.6" />
+      <module name="dubbo-container-javaconfig" target="1.6" />
+      <module name="dubbo-container-jetty" target="1.6" />
+      <module name="dubbo-container-log4j" target="1.6" />
+      <module name="dubbo-container-logback" target="1.6" />
+      <module name="dubbo-container-spring" target="1.6" />
+      <module name="dubbo-demo" target="1.5" />
+      <module name="dubbo-demo-api" target="1.6" />
+      <module name="dubbo-demo-consumer" target="1.6" />
+      <module name="dubbo-demo-provider" target="1.6" />
+      <module name="dubbo-filter" target="1.5" />
+      <module name="dubbo-filter-cache" target="1.6" />
+      <module name="dubbo-filter-validation" target="1.6" />
+      <module name="dubbo-monitor" target="1.5" />
+      <module name="dubbo-monitor-api" target="1.6" />
+      <module name="dubbo-monitor-default" target="1.6" />
+      <module name="dubbo-monitor-simple" target="1.6" />
+      <module name="dubbo-registry" target="1.5" />
+      <module name="dubbo-registry-api" target="1.6" />
+      <module name="dubbo-registry-default" target="1.6" />
+      <module name="dubbo-registry-multicast" target="1.6" />
+      <module name="dubbo-registry-redis" target="1.6" />
+      <module name="dubbo-registry-simple" target="1.6" />
+      <module name="dubbo-registry-zookeeper" target="1.6" />
+      <module name="dubbo-remoting" target="1.5" />
+      <module name="dubbo-remoting-api" target="1.6" />
+      <module name="dubbo-remoting-grizzly" target="1.6" />
+      <module name="dubbo-remoting-http" target="1.6" />
+      <module name="dubbo-remoting-mina" target="1.6" />
+      <module name="dubbo-remoting-netty" target="1.6" />
+      <module name="dubbo-remoting-p2p" target="1.6" />
+      <module name="dubbo-remoting-zookeeper" target="1.6" />
+      <module name="dubbo-rpc" target="1.5" />
+      <module name="dubbo-rpc-api" target="1.6" />
+      <module name="dubbo-rpc-default" target="1.6" />
+      <module name="dubbo-rpc-hessian" target="1.6" />
+      <module name="dubbo-rpc-http" target="1.6" />
+      <module name="dubbo-rpc-injvm" target="1.6" />
+      <module name="dubbo-rpc-memcached" target="1.6" />
+      <module name="dubbo-rpc-redis" target="1.6" />
+      <module name="dubbo-rpc-rest" target="1.6" />
+      <module name="dubbo-rpc-rmi" target="1.6" />
+      <module name="dubbo-rpc-thrift" target="1.6" />
+      <module name="dubbo-rpc-webservice" target="1.6" />
+      <module name="dubbo-simple" target="1.5" />
+      <module name="dubbo-test" target="1.5" />
+      <module name="dubbo-test-benchmark" target="1.6" />
+      <module name="dubbo-test-benchmark-api" target="1.6" />
+      <module name="dubbo-test-benchmark-client" target="1.6" />
+      <module name="dubbo-test-benchmark-server" target="1.6" />
+      <module name="dubbo-test-compatibility" target="1.6" />
+      <module name="dubbo-test-examples" target="1.6" />
+      <module name="dubbo-test-integration" target="1.6" />
+      <module name="hessian-lite" target="1.6" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="dubbo" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-admin" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-cluster" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-common" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-config-api" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-config-spring" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-container-api" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-container-javaconfig" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-container-jetty" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-container-log4j" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-container-logback" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-container-spring" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-demo-api" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-demo-consumer" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-demo-provider" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-filter-cache" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-filter-validation" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-monitor-api" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-monitor-default" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-monitor-simple" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-registry-api" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-registry-default" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-registry-multicast" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-registry-redis" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-registry-simple" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-registry-zookeeper" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-remoting-api" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-remoting-grizzly" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-remoting-http" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-remoting-mina" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-remoting-netty" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-remoting-p2p" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-remoting-zookeeper" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-rpc-api" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-rpc-default" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-rpc-hessian" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-rpc-http" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-rpc-injvm" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-rpc-memcached" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-rpc-redis" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-rpc-rest" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-rpc-rmi" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-rpc-thrift" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-rpc-webservice" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-test-benchmark" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-test-benchmark-api" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-test-benchmark-client" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-test-benchmark-server" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-test-compatibility" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-test-examples" options="-XX:MaxPermSize=512M" />
+      <module name="dubbo-test-integration" options="-XX:MaxPermSize=512M" />
+      <module name="hessian-lite" options="-XX:MaxPermSize=512M" />
+    </option>
+  </component>
+</project>

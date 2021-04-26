@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+<!--配置页面的拦截规则-->
+<http pattern="/demo.html" security="none"/>
+		<http use-expressions="false">
+<!--			定义某类资源必须由哪个角色访问，角色必须是ROLE_开头-->
+			<intercept-url pattern="/*" access="ROLE_USER"/>
+<!--			产生登录表单-->
+			<form-login login-page="/demo.html" default-target-url="/index.html" always-use-default-target="true"/>
+			<logout/>
+			<csrf disabled="true"></csrf>
+		</http>
+<!--	认证管理器，定义用户与角色的对应关系-->
+<authentication-manager >
+	<authentication-provider>
+		<user-service>
+			<user name="admin" authorities="ROLE_USER" password="$2a$10$lJ2XDj9uj9BbPIJz8S.BOemjClqKJrPqPMEvnPQlr.ju2Z1p021IK"/>
+		</user-service>
+		<password-encoder  ref="bCryptPasswordEncoder"/>
+	</authentication-provider>
+</authentication-manager>
+	<beans:bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+</beans:beans>
