@@ -28,4 +28,7 @@ app.service('tb_goodsService',function($http){
 	this.search=function (entity,page,rows){
 		return $http.post("../tb_goods/search?page="+page+"&rows="+rows,entity);
 	}
+	this.updateMarkStatus=function (ids,status) {
+		return $http.get("../tb_goods/updateMarkStatus?ids="+ids+"&status="+status)
+	}
 });

@@ -1,5 +1,7 @@
 package com.pinyougou.pageentity;
 
+
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -10,9 +12,11 @@ import java.io.Serializable;
  * @Author LZL
  * @Date 2021.04.16-20:15
  */
-@Data
 @AllArgsConstructor
+@Data
 public class Result implements Serializable {
     private boolean success;
     private String message;
+
+
 }

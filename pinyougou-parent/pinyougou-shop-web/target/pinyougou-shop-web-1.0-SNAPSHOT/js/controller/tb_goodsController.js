@@ -132,14 +132,25 @@ app.controller('tb_goodsController', function ($scope, $controller, $location, t
     //批量删除
     $scope.dele = function () {
         //获取选中的复选框
-        tb_goodsService.dele($scope.selectIds).success(
-            function (response) {
-                if (response.success) {
-                    $scope.reloadList();//刷新列表
-                }
-            }
-        );
+        // tb_goodsService.dele($scope.selectIds).success(
+        //     function (response) {
+        //         if (response.success) {
+        //             $scope.reloadList();//刷新列表
+        //         }
+        //     }
+        // );
+        let res = confirm("确定删除吗？")
+        if (res) {
+            tb_goodsService.dele($scope.selectIds).success(function (data) {
+                $scope.validData(data);
+                $scope.selectIds = [];
+            })
+            return;
+        }
+        $scope.deselect(".goods-list td:nth-child(2)");
+        $scope.selectIds = [];
     }
+
     $scope.updateSpecItems = function ($event, name, value) {
         let searchObjectByKey = $scope.searchObjectByKey($scope.entity.goodsDesc.specificationItems, "name", name);
         if (searchObjectByKey !== null) {
@@ -182,6 +193,17 @@ app.controller('tb_goodsController', function ($scope, $controller, $location, t
         tb_item_catService.findAll().success(function (res) {
             for (let i = 0; i < res.length; i++) {
                 $scope.itemCatList[res[i].id] = res[i].name
+            }
+        })
+    }
+    $scope.markStatus=["已下架","已上架"]
+    $scope.updateMarkStatus=function (status) {
+        tb_goodsService.updateMarkStatus($scope.selectIds,status).success(function (res) {
+            if(res.success){
+                $scope.reloadList()
+                $scope.selectIds=[]
+            }else{
+                alert(res.message)
             }
         })
     }
