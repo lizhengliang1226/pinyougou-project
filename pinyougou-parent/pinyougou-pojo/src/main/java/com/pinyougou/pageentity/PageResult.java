@@ -21,5 +21,4 @@ public class PageResult implements Serializable {
     private static final long serialVersionUID = -4756124157349225444L;
     private long total;
     private List rows;
-
 }

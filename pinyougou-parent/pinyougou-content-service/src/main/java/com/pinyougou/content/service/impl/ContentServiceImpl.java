@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ import java.util.List;
  * @author Administrator
  */
 @Service
+@Transactional
 public class ContentServiceImpl implements ContentService {
 
     @Autowired
@@ -109,10 +111,8 @@ public class ContentServiceImpl implements ContentService {
             tbContentExample.setOrderByClause("sort_order");//排序
             List<TbContent> tbContents = tb_contentMapper.selectByExample(tbContentExample);
             redisTemplate.boundHashOps("contentList").put(categoryId, tbContents);
-            System.out.println("从数据库取");
             return tbContents;
         }
-        System.out.println("从缓存取");
         return list;
     }
 

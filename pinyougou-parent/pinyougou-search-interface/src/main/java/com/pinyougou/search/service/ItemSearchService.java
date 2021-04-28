@@ -9,5 +9,5 @@ import java.util.Map;
  * @Date 2021.04.28-1:57
  */
 public interface ItemSearchService {
-    public Map search(Map searchMap) ;
+    public Map<String,Object> search(Map<String,Object> searchMap) ;
 }

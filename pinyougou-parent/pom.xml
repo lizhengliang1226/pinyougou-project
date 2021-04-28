@@ -56,10 +56,16 @@
         <jedis.version>2.8.1</jedis.version>
         <spring.data.redis.version>1.7.2.RELEASE</spring.data.redis.version>
         <spring.data.solr.version>1.5.5.RELEASE</spring.data.solr.version>
+        <jackson.version>2.9.5</jackson.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-solr</artifactId>

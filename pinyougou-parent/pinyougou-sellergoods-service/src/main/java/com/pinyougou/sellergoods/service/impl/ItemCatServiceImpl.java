@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -25,7 +27,11 @@ public class ItemCatServiceImpl implements ItemCatService {
 
 	@Autowired
 	private TbItemCatMapper tbItemCatMapper;
-	
+	@Autowired
+	private RedisTemplate redisTemplate;
+
+	@Value("${ITEM_CAT_REDIS_NAME}")
+	private String ITEM_CAT_REDIS_NAME;
 	/**
 	 * 查询全部
 	 */
@@ -92,6 +98,10 @@ public class ItemCatServiceImpl implements ItemCatService {
 		TbItemCatExample tbItemCatExample = new TbItemCatExample();
 		TbItemCatExample.Criteria criteria = tbItemCatExample.createCriteria();
 		criteria.andParentIdEqualTo(id);
+		List<TbItemCat> tbItemCats = tbItemCatMapper.selectByExample(null);
+		tbItemCats.forEach(itemCat->{
+			redisTemplate.boundHashOps(ITEM_CAT_REDIS_NAME).put(itemCat.getName(),itemCat.getTypeId());
+		});
 		return tbItemCatMapper.selectByExample(tbItemCatExample);
 	}
 
