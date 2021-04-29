@@ -12,6 +12,6 @@
 	<dubbo:application name="pinyougou-search-service"/>
     <dubbo:registry address="zookeeper://192.168.182.133:2181"/>
     <dubbo:annotation package="com.pinyougou.search.service.impl" />
-<context:property-placeholder location="classpath:config/redisList.properties"/>
+<context:property-placeholder location="classpath*:properties/*.properties"/>
 
 </beans>

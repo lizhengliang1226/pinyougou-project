@@ -1,5 +1,6 @@
 package com.pinyougou.sellergoods.service.impl;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -91,13 +92,13 @@ public class GoodsServiceImpl implements GoodsService {
             if ("1".equals(tbGoods.getGoods().getIsEnableSpec())) {
                 AtomicReference<String> title = new AtomicReference<>(tbGoods.getGoods().getGoodsName());
                 Map<String, Object> map = JSON.parseObject(item.getSpec());
-                map.forEach((k,v)->{
+                map.forEach((k, v) -> {
                     title.updateAndGet(v1 -> v1 + v);
                 });
                 item.setTitle(title.get());
-                setItemValues(item,tbGoods);
-            }else{
-                TbItem tbItem=new TbItem();
+                setItemValues(item, tbGoods);
+            } else {
+                TbItem tbItem = new TbItem();
                 tbItem.setTitle(tbGoods.getGoods().getGoodsName());
                 tbItem.setSellPoint("无");
                 tbItem.setPrice(tbGoods.getGoods().getPrice());
@@ -181,9 +182,6 @@ public class GoodsServiceImpl implements GoodsService {
         }
         Page<TbGoods> page = (Page<TbGoods>) tbGoodsMapper.selectByExample(tbGoodsExample);
         List<TbGoods> result = page.getResult();
-        for(TbGoods goods : result) {
-            System.out.println(goods.getGoodsName());
-        }
         return new PageResult(page.getTotal(), page.getResult());
     }
 
@@ -197,12 +195,44 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public void updateMarkStatus(Long[] ids, String status) {
+    public void updateMarkStatus(Long[] ids, String status, String sellerId) {
+        String itemStatus = "1";
+        itemStatus = status.equals("1") ? itemStatus : "2";
         for(Long id : ids) {
+            //设置spu的状态
             TbGoods tbGoods = tbGoodsMapper.selectByPrimaryKey(id);
             tbGoods.setIsMarketable(status);
+            tbGoods.setSellerId(sellerId);
             tbGoodsMapper.updateByPrimaryKey(tbGoods);
+            //设置sku的状态与spu相同
+            setItemStatus(itemStatus, id);
+
         }
+    }
+
+    /**
+     * 当spu的状态变化时，也要设置其sku的状态为可用或者不可用
+     * @param itemStatus
+     * @param id
+     */
+    private void setItemStatus(String itemStatus, Long id) {
+        TbItemExample tbItemExample = new TbItemExample();
+        TbItemExample.Criteria criteria = tbItemExample.createCriteria();
+        criteria.andGoodsIdEqualTo(id);
+        List<TbItem> tbItems = itemMapper.selectByExample(tbItemExample);
+        tbItems.forEach(item -> {
+            item.setStatus(itemStatus);
+            itemMapper.updateByPrimaryKey(item);
+        });
+    }
+
+    @Override
+    public List<TbItem> findItemListByGoodsIds(Long[] goodsIds) {
+        TbItemExample tbItemExample = new TbItemExample();
+        TbItemExample.Criteria criteria = tbItemExample.createCriteria();
+        criteria.andGoodsIdIn(Arrays.asList(goodsIds));
+        criteria.andStatusEqualTo("1");
+        return itemMapper.selectByExample(tbItemExample);
     }
 
 }

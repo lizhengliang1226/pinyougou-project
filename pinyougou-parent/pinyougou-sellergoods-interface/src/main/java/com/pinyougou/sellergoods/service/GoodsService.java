@@ -3,6 +3,7 @@ import java.util.List;
 
 import com.pinyougou.pageentity.PageResult;
 import com.pinyougou.pojo.TbGoods;
+import com.pinyougou.pojo.TbItem;
 import com.pinyougou.pojogroup.Goods;
 
 /**
@@ -62,9 +63,17 @@ public interface GoodsService {
 	 * @param ids
 	 */
 	public void updateStatus(Long[] ids,String status);
+
 	/**
 	 * 批量更新上下架状态
 	 * @param ids
 	 */
-	public void updateMarkStatus(Long[] ids,String status);
+	public void updateMarkStatus(Long[] ids,String status,String sellerId);
+
+	/**
+	 * 根据spu的id查询sku列表
+	 * @param goodsIds
+	 * @return
+	 */
+	public List<TbItem> findItemListByGoodsIds(Long[] goodsIds);
 }

@@ -10,4 +10,16 @@ import java.util.Map;
  */
 public interface ItemSearchService {
     public Map<String,Object> search(Map<String,Object> searchMap) ;
+
+    /**
+     * 导入sku列表到索引库
+     * @param list
+     */
+    public void importList(List list);
+
+    /**
+     * 删除sku列表从索引库
+     * @param goodsIds
+     */
+    public void deleteByGoodsIds(Long[] goodsIds);
 }

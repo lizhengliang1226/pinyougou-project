@@ -10,9 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.solr.core.SolrTemplate;
-import org.springframework.data.solr.core.query.Criteria;
-import org.springframework.data.solr.core.query.Query;
-import org.springframework.data.solr.core.query.SimpleQuery;
 import org.springframework.stereotype.Component;
 
 
@@ -20,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description
+ * @Description 导入所有数据库数据到solr的工具类
  * @Author LZL
  * @Date 2021.04.28-0:54
  */
