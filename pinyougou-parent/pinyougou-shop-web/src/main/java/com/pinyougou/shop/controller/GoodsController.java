@@ -1,6 +1,7 @@
 package com.pinyougou.shop.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.pinyougou.page.service.ItemPageService;
 import com.pinyougou.pageentity.PageResult;
 import com.pinyougou.pageentity.Result;
 import com.pinyougou.pojo.TbGoods;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -28,7 +30,8 @@ public class GoodsController {
     private GoodsService goodsService;
     @Reference
     private ItemSearchService itemSearchService;
-
+    @Reference
+    private ItemPageService itemPageService;
     /**
      * 返回全部列表
      *
@@ -137,15 +140,26 @@ public class GoodsController {
                 List<TbItem> itemListByGoodsIds = goodsService.findItemListByGoodsIds(ids);
                 if (itemListByGoodsIds.size() > 0) {
                     itemSearchService.importList(itemListByGoodsIds);
+                    //商品上架后，生成详情页
+                    for(Long id : ids) {
+                        itemPageService.generateItemHtml(id);
+                    }
                 }
             } else {//下架删除索引库的数据
                 itemSearchService.deleteByGoodsIds(ids);
+                for(Long id : ids) {
+                    itemPageService.deleteHtml(id);
+                }
             }
             return new Result(true, "更新成功");
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(false, "更新失败");
         }
+    }
+    @RequestMapping("/generate")
+    public void generateHtml(Long goodsId) throws IOException {
+        itemPageService.generateItemHtml(goodsId);
     }
 
 }

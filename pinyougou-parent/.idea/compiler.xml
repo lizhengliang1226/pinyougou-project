@@ -15,6 +15,8 @@
         <module name="pinyougou-sellergoods-service" />
         <module name="pinyougou-content-service" />
         <module name="pinyougou-search-web" />
+        <module name="pinyougou-page-interface" />
+        <module name="pinyougou-page-service" />
         <module name="pinyougou-manager-web" />
         <module name="pinyougou-solr-util" />
         <module name="pinyougou-content-interface" />

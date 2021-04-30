@@ -63,7 +63,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public void add(Goods tbGoods) {
         tbGoods.getGoods().setAuditStatus("0");//审核状态
-        tbGoods.getGoods().setIsMarketable("1");
+        tbGoods.getGoods().setIsMarketable("0");
         tbGoodsMapper.insert(tbGoods.getGoods());
         tbGoods.getGoodsDesc().setGoodsId(tbGoods.getGoods().getId());
         tbGoodsDescMapper.insert(tbGoods.getGoodsDesc());
@@ -109,6 +109,8 @@ public class GoodsServiceImpl implements GoodsService {
                 tbItem.setStatus("1");
                 tbItem.setCreateTime(new Date());
                 tbItem.setUpdateTime(new Date());
+                List<Map> list = JSON.parseObject(tbGoods.getGoodsDesc().getItemImages(), List.class);
+                tbItem.setImage((String) list.get(0).get("url"));
                 itemMapper.insert(tbItem);
             }
 
@@ -122,6 +124,8 @@ public class GoodsServiceImpl implements GoodsService {
         tbItem.setCreateTime(new Date());
         tbItem.setUpdateTime(new Date());
         tbItem.setStatus("1");
+        List<Map> list = JSON.parseObject(tbGoods.getGoodsDesc().getItemImages(), List.class);
+        tbItem.setImage((String) list.get(0).get("url"));
         itemMapper.insert(tbItem);
     }
 
@@ -206,7 +210,6 @@ public class GoodsServiceImpl implements GoodsService {
             tbGoodsMapper.updateByPrimaryKey(tbGoods);
             //设置sku的状态与spu相同
             setItemStatus(itemStatus, id);
-
         }
     }
 
