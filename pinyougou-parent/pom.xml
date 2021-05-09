@@ -24,6 +24,10 @@
         <module>pinyougou-search-web</module>
         <module>pinyougou-page-interface</module>
         <module>pinyougou-page-service</module>
+        <module>pinyougou-user-interface</module>
+        <module>pintougou-user-service</module>
+        <module>pinyougou-user-web</module>
+        <module>pinyougou-sms-service</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -59,10 +63,22 @@
         <spring.data.redis.version>1.7.2.RELEASE</spring.data.redis.version>
         <spring.data.solr.version>1.5.5.RELEASE</spring.data.solr.version>
         <jackson.version>2.9.5</jackson.version>
+        <activemq.version>5.13.4</activemq.version>
+        <jms.version>2.0.1</jms.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>javax.jms</groupId>
+                <artifactId>javax.jms-api</artifactId>
+                <version>${jms.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-client</artifactId>
+                <version>${activemq.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
