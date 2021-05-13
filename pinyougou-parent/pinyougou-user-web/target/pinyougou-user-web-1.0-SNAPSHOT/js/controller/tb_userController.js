@@ -23,5 +23,9 @@ app.controller('tb_userController', function ($scope, tb_userService) {
             alert(res.message);
         })
     }
-
+    $scope.loginName=function () {
+        tb_userService.loginName().success(function (res) {
+            $scope.entity.username=res.username
+        })
+    }
 });	

@@ -10,9 +10,13 @@
 
     <link rel="stylesheet" type="text/css" href="css/webbase.css" />
     <link rel="stylesheet" type="text/css" href="css/pages-seckillOrder.css" />
+    <script src="/plugins/angularjs/angular.min.js"></script>
+    <script src="/js/base.js"></script>
+    <script src="/js/service/loginService.js"></script>
+    <script src="/js/controller/indexController.js"></script>
 </head>
 
-<body>
+<body ng-app="pinyougou" ng-controller="indexController" ng-init="loginName()">
     <!-- 头部栏位 -->
     <!--页面顶部-->
 <div id="nav-bottom">
@@ -142,6 +146,9 @@ $(function(){
 <script type="text/javascript" src="js/plugins/sui/sui.min.js"></script>
 <script type="text/javascript" src="js/plugins/jquery-placeholder/jquery.placeholder.min.js"></script>
 <script type="text/javascript" src="js/widget/nav.js"></script>
+
+
+
 </body>
     <!--header-->
     <div id="account">
@@ -153,8 +160,8 @@ $(function(){
                     <div class="person-info">
                         <div class="person-photo"><img src="img/_/photo.png" alt=""></div>
                         <div class="person-account">
-                            <span class="name">Michelle</span>
-                            <span class="safe"><a href="#">退出登录 </a></span>
+                            <span class="name" >{{loginName}}</span>
+                            <span class="safe"><a href="/logout/cas">退出登录 </a></span>
                         </div>
                         <div class="clearfix"></div>
                     </div>

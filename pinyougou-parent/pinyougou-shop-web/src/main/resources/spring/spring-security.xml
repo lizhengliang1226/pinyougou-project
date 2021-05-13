@@ -43,7 +43,7 @@
     <dubbo:application name="pinyougou-shop-web" />
     <dubbo:registry address="zookeeper://192.168.182.133:2181"/>
     <dubbo:reference interface="com.pinyougou.sellergoods.service.SellerService" id="sellerService"/>
-    <beans:bean id="userDetailService" class="com.pinyougou.service.UserDetailsServiceImpl">
+    <beans:bean id="userDetailService" class="com.pinyougou.cart.service.UserDetailsServiceImpl">
         <beans:property name="sellerService" ref="sellerService"/>
     </beans:bean>
 </beans:beans>

@@ -8,5 +8,7 @@ app.service('tb_userService',function($http){
 	this.sendCode=function (phone){
 		return $http.get("../tb_user/sendCode?phone="+phone)
 	}
-	    	
+	this.loginName=function () {
+		return $http.get("../login/name");
+	}
 });
