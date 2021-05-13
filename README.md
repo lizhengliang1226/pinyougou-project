@@ -1,6 +1,9 @@
 
 
 # 品优购项目
+系统架构图
+![image](https://user-images.githubusercontent.com/75490362/117753589-50a1bb80-b24b-11eb-9a43-65efc9138490.png)
+
 
 ### SOA开发模式
 
