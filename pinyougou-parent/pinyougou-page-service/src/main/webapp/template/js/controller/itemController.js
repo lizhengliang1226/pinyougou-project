@@ -33,7 +33,8 @@ app.controller('itemController', function ($scope) {
 
     }
     $scope.addToCart=function () {
-        alert($scope.sku.id)
+        // alert($scope.sku.id)
+        location.href="http://localhost:9106/cart.html#?itemId="+$scope.sku.id+"&num="+$scope.num;
     }
     $scope.matchObj = function (a, b) {
             //获取a和b的属性长度

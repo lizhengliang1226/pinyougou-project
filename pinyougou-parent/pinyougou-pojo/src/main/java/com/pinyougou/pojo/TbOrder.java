@@ -55,6 +55,8 @@ public class TbOrder implements Serializable {
 
     private String sellerId;
 
+    private String outTradeNo;
+
     public Long getOrderId() {
         return orderId;
     }
@@ -253,5 +255,13 @@ public class TbOrder implements Serializable {
 
     public void setSellerId(String sellerId) {
         this.sellerId = sellerId == null ? null : sellerId.trim();
+    }
+
+    public String getOutTradeNo() {
+        return outTradeNo;
+    }
+
+    public void setOutTradeNo(String outTradeNo) {
+        this.outTradeNo = outTradeNo == null ? null : outTradeNo.trim();
     }
 }

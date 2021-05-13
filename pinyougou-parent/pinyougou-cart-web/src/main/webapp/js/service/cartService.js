@@ -24,10 +24,12 @@ app.service('cartService', function ($http) {
                 totalValue.totalPrice+=orderItem.totalFee
             }
         }
-
         return totalValue;
     }
     this.findCartList=function (cartList) {
         return $http.post("cart/findCartList",cartList)
+    }
+    this.submitOrder=function (order) {
+        return $http.post("tb_order/add",order)
     }
 });

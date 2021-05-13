@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="css/pages-cart.css" />	<script src="/plugins/angularjs/angular.min.js"></script>
 	<script src="/js/base.js"></script>
 	<script src="/js/service/cartService.js"></script>
+	<script src="/js/service/tb_addressService.js"></script>
+
 	<script src="/js/controller/cartController.js"></script>
 </head>
 
@@ -84,13 +86,13 @@
 									</div>
 								</li>
 								
-								<li class="yui3-u-1-8"><span class="price">{{item.price}}</span></li>
+								<li class="yui3-u-1-8"><span class="price">{{item.price.toFixed(2)}}</span></li>
 								<li class="yui3-u-1-8">
 									<a href="javascript:void(0)" ng-click="addGoodsToCartList(item.itemId,-1)" class="increment mins">-</a>
 									<input autocomplete="off" type="text" ng-model="item.num" value="1" minnum="1" class="itxt" />
 									<a href="javascript:void(0)"ng-click="addGoodsToCartList(item.itemId,1)"  class="increment plus">+</a>
 								</li>
-								<li class="yui3-u-1-8"><span class="sum">{{item.totalFee}}</span></li>
+								<li class="yui3-u-1-8"><span class="sum">{{item.totalFee.toFixed(2)}}</span></li>
 								<li class="yui3-u-1-8">
 									<a ng-click="addGoodsToCartList(item.itemId,0-item.num)">删除</a><br />
 									<a href="#none">移到我的关注</a>
@@ -113,7 +115,7 @@
 				<div class="toolbar">
 					<div class="chosed" style="padding-top: 10px">已选择<span>{{totalValue.totalNum}}</span>件商品</div>
 					<div class="sumprice" style="width: 260px;padding-top: 10px">
-						<span><em>总价（不含运费)：￥</em><i class="summoney">{{totalValue.totalPrice}}</i></span>
+						<span><em>总价（不含运费)：￥</em><i class="summoney">{{totalValue.totalPrice.toFixed(2)}}</i></span>
 						<span><em>已节省：</em><i>-¥20.00</i></span>
 					</div>
 					<div class="sumbtn">

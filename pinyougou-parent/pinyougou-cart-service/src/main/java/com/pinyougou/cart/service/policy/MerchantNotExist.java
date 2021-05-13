@@ -16,7 +16,7 @@ public class MerchantNotExist implements AddMerchandisePolicy{
     @Override
     public void addPolicy(Cart cart, List<Cart> cartList, Integer num, TbItem tbItem) {
         List<TbOrderItem> list = new ArrayList<>();
-        TbOrderItem orderItem = setOrderItem(num, tbItem);
+        TbOrderItem orderItem = AddMerchandisePolicy.setOrderItem(num, tbItem);
         list.add(orderItem);
         cart = new Cart(tbItem.getSellerId(), tbItem.getSeller(), list);
         cartList.add(cart);

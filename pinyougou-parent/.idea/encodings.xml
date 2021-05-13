@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/pintougou-user-service/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/pintougou-user-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-cart-interface/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-cart-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-cart-service/src/main/resources" charset="UTF-8" />
@@ -18,6 +16,9 @@
     <file url="file://$PROJECT_DIR$/pinyougou-dao/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-manager-web/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-manager-web/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-order-interface/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-order-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-order-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-page-interface/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-page-interface/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-page-service/src/main/java" charset="UTF-8" />
@@ -42,6 +43,8 @@
     <file url="file://$PROJECT_DIR$/pinyougou-solr-util/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-solr-util/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-user-interface/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-user-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou-user-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-user-web/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou-user-web/src/main/resources" charset="UTF-8" />
   </component>
