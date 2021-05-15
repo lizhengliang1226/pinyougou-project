@@ -15,6 +15,7 @@
         <module name="pinyougou-pay-service" />
         <module name="pinyougou-page-service" />
         <module name="pinyougou-manager-web" />
+        <module name="pinyougou-seckill-interface" />
         <module name="pinyougou-solr-util" />
         <module name="pinyougou-content-interface" />
         <module name="pinyougou-search-service" />
