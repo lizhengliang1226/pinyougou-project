@@ -1,3 +1,5 @@
-util\FastDFSClient.class
+util\HttpClient$1.class
 util\PhoneFormatCheckUtils.class
 util\IdWorker.class
+util\FastDFSClient.class
+util\HttpClient.class

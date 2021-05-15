@@ -97,13 +97,13 @@ app.controller('cartController', function ($scope, $location,tb_addressService,c
         $scope.order.receiverAreaName=$scope.address.address
         $scope.order.receiverMobile=$scope.address.mobile
         $scope.order.receiver=$scope.address.contact
+        // $scope.order.payment=$scope.totalValue.totalPrice
         cartService.submitOrder($scope.order).success(function (res) {
             if (res.success){
                 if ($scope.order.paymentType === '1') {
                     location.href="pay.html"
                 }else{
                     location.href="paysuccess.html"
-
                 }
             }else{
                 alert(res.message)
