@@ -93,11 +93,6 @@ partnerkey=8A627A4578ACE384017C997F12D68B23*/
                 e.printStackTrace();
             }
         }
-//        try {
-//            Thread.sleep(2000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
         return map;
     }
 
@@ -111,7 +106,6 @@ partnerkey=8A627A4578ACE384017C997F12D68B23*/
         httpClient.post();
         String resultXml = httpClient.getContent();
 //        System.out.println("返回的xml" + resultXml);
-        Map<String, String> resultMap = WXPayUtil.xmlToMap(resultXml);
-        return resultMap;
+        return WXPayUtil.xmlToMap(resultXml);
     }
 }

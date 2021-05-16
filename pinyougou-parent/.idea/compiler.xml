@@ -10,6 +10,7 @@
         <module name="pinyougou-portal-web" />
         <module name="pinyougou-user-web" />
         <module name="pinyougou-sellergoods-service" />
+        <module name="pinyougou-seckill-service" />
         <module name="pinyougou-user-interface" />
         <module name="pinyougou-page-interface" />
         <module name="pinyougou-pay-service" />
@@ -28,6 +29,7 @@
         <module name="pinyougou-cart-web" />
         <module name="pinyougou-content-service" />
         <module name="pinyougou-search-web" />
+        <module name="pinyougou-seckill-web" />
         <module name="pinyougou-pay-interface" />
         <module name="pinyougou-order-service" />
         <module name="pinyougou-user-service" />
