@@ -11,19 +11,10 @@ app.controller('tb_goodsController' ,function($scope,$controller , $location, tb
 			}			
 		);
 	}    
-	
-	//分页
-	// $scope.findPage=function(page,rows){
-	// 	tb_goodsService.findPage(page,rows).success(
-	// 		function(response){
-	// 			$scope.list=response.rows;
-	// 			$scope.paginationConf.totalItems=response.total;//更新总记录数
-	// 		}
-	// 	);
-	// }
+
 	//分页
 	$scope.findPage = function (page, rows) {
-		tb_goodsService.search($scope.searchEntity, page, rows).success(
+		tb_goodsService.search( page, rows,$scope.searchEntity).success(
 			function (response) {
 				$scope.list = response.rows;
 				$scope.paginationConf.totalItems = response.total;//更新总记录数
@@ -35,14 +26,7 @@ app.controller('tb_goodsController' ,function($scope,$controller , $location, tb
 			$scope.itemCat1List = res
 		})
 	}
-	// //查询实体
-	// $scope.findOne=function(id){
-	// 	tb_goodsService.findOne(id).success(
-	// 		function(response){
-	// 			$scope.entity= response;
-	// 		}
-	// 	);
-	// }
+
 	//查询实体
 	$scope.entity = {goodsDesc: {itemImages: [], specificationItems: []}}
 	$scope.findOne = function () {
@@ -66,8 +50,8 @@ app.controller('tb_goodsController' ,function($scope,$controller , $location, tb
 		);
 	}
 	//保存 
-	$scope.save=function(){				
-		var serviceObject;//服务层对象  				
+	$scope.save=function(){
+		let serviceObject;//服务层对象
 		if($scope.entity.id!=null){//如果有ID
 			serviceObject=tb_goodsService.update( $scope.entity );
 		}else{

@@ -1,0 +1,11 @@
+配置文件问题：
+   <!-- 加载配置属性文件 -->
+    <context:property-placeholder ignore-unresolvable="true"
+                                  ignore-resource-not-found="true"
+                                  location="classpath*:properties/redis-cluster-config.properties"/>
+通过这个标签加载配置文件时，spring只会扫描一次，因此当配置多个properties时会出现属性找不到的情况，异常是：
+无法解析${key}
+此时需要给配置文件添加两个标签，ignore-unresolvable="true"
+                                  ignore-resource-not-found="true"
+然后mvn clean install重新安装，就不会报错了，一定要clean再安装，否则之前的不会被覆盖，还是会
+报异常

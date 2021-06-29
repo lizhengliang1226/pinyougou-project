@@ -3,10 +3,12 @@ package com.pinyougou.sellergoods.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.pinyougou.mapper.TbSpecificationMapper;
 import com.pinyougou.mapper.TbSpecificationOptionMapper;
 import com.pinyougou.pageentity.PageResult;
 import com.pinyougou.pojo.TbSpecification;
+import com.pinyougou.pojo.TbSpecificationExample;
 import com.pinyougou.pojo.TbSpecificationOption;
 import com.pinyougou.pojo.TbSpecificationOptionExample;
 import com.pinyougou.pojogroup.Specification;
@@ -44,9 +46,16 @@ public class SpecificationServiceImpl implements SpecificationService {
      * 按分页查询
      */
     @Override
-    public PageResult findPage(int pageNum, int pageSize) {
+    public PageResult findPage(int pageNum, int pageSize,TbSpecification tbSpecification) {
         PageHelper.startPage(pageNum, pageSize);
-        Page<TbSpecification> page = (Page<TbSpecification>) tbSpecificationMapper.selectByExample(null);
+        TbSpecificationExample tbSpecificationExample=new TbSpecificationExample();
+        TbSpecificationExample.Criteria criteria = tbSpecificationExample.createCriteria();
+        if (ObjectUtil.isNotEmpty(tbSpecification)){
+            if (ObjectUtil.isNotEmpty(tbSpecification.getSpecName())){
+                criteria.andSpecNameLike("%"+tbSpecification.getSpecName()+"%");
+            }
+        }
+        Page<TbSpecification> page = (Page<TbSpecification>) tbSpecificationMapper.selectByExample(tbSpecificationExample);
         return new PageResult(page.getTotal(), page.getResult());
     }
 

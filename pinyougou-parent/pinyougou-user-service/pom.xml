@@ -8,7 +8,7 @@
     <artifactId>pinyougou-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <artifactId>pintougou-user-service</artifactId>
+  <artifactId>pinyougou-user-service</artifactId>
 
   <packaging>war</packaging>
 

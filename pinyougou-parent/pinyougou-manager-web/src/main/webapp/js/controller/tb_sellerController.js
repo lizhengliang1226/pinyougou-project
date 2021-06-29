@@ -2,7 +2,7 @@
 app.controller('tb_sellerController', function ($scope, $controller, tb_sellerService) {
 
     $controller('baseController', {$scope: $scope});//继承
-
+    $scope.sellerStatus=["未审核","审核通过","审核未通过","关闭商家"]
     //读取列表数据绑定到表单中  
     $scope.findAll = function () {
         tb_sellerService.findAll().success(

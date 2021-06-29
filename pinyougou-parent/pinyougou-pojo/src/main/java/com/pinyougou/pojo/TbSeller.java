@@ -36,7 +36,7 @@ public class TbSeller implements Serializable {
 
     private String orgNumber;
 
-    private Long address;
+    private String address;
 
     private String logoPic;
 
@@ -180,11 +180,11 @@ public class TbSeller implements Serializable {
         this.orgNumber = orgNumber == null ? null : orgNumber.trim();
     }
 
-    public Long getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Long address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
@@ -243,4 +243,5 @@ public class TbSeller implements Serializable {
     public void setBankName(String bankName) {
         this.bankName = bankName == null ? null : bankName.trim();
     }
+
 }

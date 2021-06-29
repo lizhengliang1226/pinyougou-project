@@ -1,7 +1,8 @@
 package com.pinyougou.page.service;
 
-import java.io.IOException;
 
+import java.io.IOException;
+import com.pinyougou.pageentity.Result;
 /**
  * @Description
  * @Author LZL
@@ -13,7 +14,7 @@ public interface ItemPageService  {
      * @param goodsId
      * @return
      */
-    public boolean generateItemHtml(Long goodsId) throws IOException;
+    public Result generateItemHtml(Long goodsId) throws IOException;
 
     /**
      * 当商品下架时，删除对应的sku静态文件

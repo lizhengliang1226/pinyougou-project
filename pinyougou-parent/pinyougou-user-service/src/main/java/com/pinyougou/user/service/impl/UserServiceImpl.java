@@ -64,9 +64,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean checkCode(String code,String phone) {
 		String o = (String) redisTemplate.boundValueOps("smsCode_" + phone).get();
-		if (StrUtil.isEmpty(o)){
-			return false;
-		}else return code.equals(o);
+		return !StrUtil.isEmpty(o) && code.equals(o);
 	}
 
 }

@@ -6,8 +6,8 @@ app.service('tb_goodsService',function($http){
 		return $http.get('../tb_goods/findAll.do');		
 	}
 	//分页 
-	this.findPage=function(page,rows){
-		return $http.get('../tb_goods/findPage.do?page='+page+'&rows='+rows);
+	this.findPage=function(page,rows,searchEntity){
+		return $http.post('../tb_goods/findPage.do?page='+page+'&rows='+rows,searchEntity);
 	}
 	//查询实体
 	this.findOne=function(id){
@@ -25,7 +25,7 @@ app.service('tb_goodsService',function($http){
 	this.dele=function(ids){
 		return $http.get('../tb_goods/delete.do?ids='+ids);
 	}
-	this.search=function (entity,page,rows){
+	this.search=function (page,rows,entity){
 		return $http.post("../tb_goods/search?page="+page+"&rows="+rows,entity);
 	}
 	this.updateStatus=function (ids,status) {

@@ -1,6 +1,6 @@
 package com.pinyougou.pageentity;
 
-import java.io.Serial;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -37,7 +37,7 @@ public class PageResult implements Serializable {
     public PageResult() {
     }
 
-    @Serial
+
     private static final long serialVersionUID = -4756124157349225444L;
     private long total;
     private List rows;

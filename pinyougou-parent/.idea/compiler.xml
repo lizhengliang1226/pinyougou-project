@@ -31,6 +31,7 @@
         <module name="pinyougou-search-web" />
         <module name="pinyougou-seckill-web" />
         <module name="pinyougou-pay-interface" />
+        <module name="spring-demo" />
         <module name="pinyougou-order-service" />
         <module name="pinyougou-user-service" />
         <module name="pinyougou-sms-service" />
@@ -39,10 +40,5 @@
         <module name="pinyougou-dao" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="alicom-dysms-api" target="1.5" />
-      <module name="java_cryptography" target="1.8" />
-      <module name="springjms_producer" target="14" />
-    </bytecodeTargetLevel>
   </component>
 </project>

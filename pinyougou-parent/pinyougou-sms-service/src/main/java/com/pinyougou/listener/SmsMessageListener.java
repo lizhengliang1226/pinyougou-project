@@ -36,6 +36,5 @@ public class SmsMessageListener implements MessageListener {
         SendSmsResponse sendSmsResponse = smsUtil.sendSms(phone, templateCode, param);
         System.out.println("发送响应码为：" + sendSmsResponse.getCode());
         System.out.println("发送消息返回信息：" + sendSmsResponse.getMessage());
-
     }
 }

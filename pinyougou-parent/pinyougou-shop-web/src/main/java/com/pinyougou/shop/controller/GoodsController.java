@@ -9,12 +9,14 @@ import com.pinyougou.pojo.TbItem;
 import com.pinyougou.pojogroup.Goods;
 import com.pinyougou.search.service.ItemSearchService;
 import com.pinyougou.sellergoods.service.GoodsService;
+import com.pinyougou.sellergoods.service.ItemService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -26,12 +28,13 @@ import java.util.List;
 @RequestMapping("/tb_goods")
 public class GoodsController {
 
-    @Reference
+    @Reference(timeout = 5000)
     private GoodsService goodsService;
     @Reference
     private ItemSearchService itemSearchService;
     @Reference
     private ItemPageService itemPageService;
+
     /**
      * 返回全部列表
      *
@@ -50,7 +53,10 @@ public class GoodsController {
      */
     @RequestMapping("/findPage")
     public PageResult findPage(int page, int rows) {
-        return goodsService.findPage(page, rows);
+        PageResult page1 = goodsService.findPage(page, rows);
+        List<TbGoods> rows1 = page1.getRows();
+        rows1.forEach(s -> System.out.println(s.getId()));
+        return page1;
     }
 
     /**
@@ -133,30 +139,47 @@ public class GoodsController {
 
     @RequestMapping("/updateMarkStatus")
     public Result updateStatus(Long[] ids, String status) {
+        Result result = new Result();
+        result.setSuccess(true);
+        //is-markertable-0下架 -1上架
         String sellerId = SecurityContextHolder.getContext().getAuthentication().getName();
         try {
+            //更新spu和sku的状态
             goodsService.updateMarkStatus(ids, status, sellerId);
+            StringBuilder message = new StringBuilder();
             if (status.equals("1")) {//上架更新索引库
                 List<TbItem> itemListByGoodsIds = goodsService.findItemListByGoodsIds(ids);
                 if (itemListByGoodsIds.size() > 0) {
                     itemSearchService.importList(itemListByGoodsIds);
                     //商品上架后，生成详情页
                     for(Long id : ids) {
-                        itemPageService.generateItemHtml(id);
+                        Result res = itemPageService.generateItemHtml(id);
+                        message.append(res.getMessage());
+                        System.out.println(result.getMessage());
                     }
                 }
-            } else {//下架删除索引库的数据
+                result.setMessage(message.toString() + ",更新成功！");
+            } else {
+                //下架删除索引库的数据
+                //考虑到有的spu没有对应的sku，
+                // 所以不能直接全部删除，
+                // 有些没有sku的spu在之前上架的时候就没有添加到索引库，直接删除会报文本流异常
+                //所以才单个遍历，然后删除
                 itemSearchService.deleteByGoodsIds(ids);
                 for(Long id : ids) {
                     itemPageService.deleteHtml(id);
                 }
+                result.setMessage("更新成功！");
             }
-            return new Result(true, "更新成功");
+            return result;
         } catch (Exception e) {
             e.printStackTrace();
-            return new Result(false, "更新失败");
+            result.setMessage("更新失败！");
+            result.setSuccess(false);
+            return result;
         }
     }
+
     @RequestMapping("/generate")
     public void generateHtml(Long goodsId) throws IOException {
         itemPageService.generateItemHtml(goodsId);

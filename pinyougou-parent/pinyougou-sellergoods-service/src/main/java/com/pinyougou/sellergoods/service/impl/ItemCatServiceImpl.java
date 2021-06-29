@@ -98,7 +98,7 @@ public class ItemCatServiceImpl implements ItemCatService {
 		TbItemCatExample tbItemCatExample = new TbItemCatExample();
 		TbItemCatExample.Criteria criteria = tbItemCatExample.createCriteria();
 		criteria.andParentIdEqualTo(id);
-		List<TbItemCat> tbItemCats = tbItemCatMapper.selectByExample(null);
+		List<TbItemCat> tbItemCats = tbItemCatMapper.selectByExample(tbItemCatExample);
 		tbItemCats.forEach(itemCat->{
 			redisTemplate.boundHashOps(ITEM_CAT_REDIS_NAME).put(itemCat.getName(),itemCat.getTypeId());
 		});

@@ -39,7 +39,7 @@ public class GoodsController {
 	 * @return
 	 */
 	@RequestMapping("/findPage")
-	public PageResult findPage(int page, int rows){
+	public PageResult findPage(int page, int rows,@RequestBody TbGoods tbGoods){
 		return goodsService.findPage(page, rows);
 	}
 	

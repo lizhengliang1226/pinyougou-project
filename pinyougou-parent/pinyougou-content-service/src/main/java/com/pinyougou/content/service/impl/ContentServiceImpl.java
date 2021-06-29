@@ -7,7 +7,6 @@ import com.pinyougou.mapper.TbContentMapper;
 import com.pinyougou.pageentity.PageResult;
 import com.pinyougou.pojo.TbContent;
 import com.pinyougou.pojo.TbContentExample;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
@@ -58,7 +57,6 @@ public class ContentServiceImpl implements ContentService {
         //清空缓存
         redisTemplate.boundHashOps("contentList").delete(tb_content.getCategoryId());
     }
-
 
     /**
      * 修改
@@ -111,8 +109,10 @@ public class ContentServiceImpl implements ContentService {
             tbContentExample.setOrderByClause("sort_order");//排序
             List<TbContent> tbContents = tb_contentMapper.selectByExample(tbContentExample);
             redisTemplate.boundHashOps("contentList").put(categoryId, tbContents);
+            System.out.println("从数据库取数据");
             return tbContents;
         }
+        System.out.println("从缓存取数据");
         return list;
     }
 

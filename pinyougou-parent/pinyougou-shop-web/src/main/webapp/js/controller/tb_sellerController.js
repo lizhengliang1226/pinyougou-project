@@ -1,38 +1,45 @@
 //控制层
-app.controller('tb_sellerController', function ($scope, $controller, tb_sellerService) {
+app.controller('tb_sellerController', function ($scope, tb_sellerService) {
 
-    $controller('baseController', {$scope: $scope});//继承
 
-    //读取列表数据绑定到表单中  
-    $scope.findAll = function () {
-        tb_sellerService.findAll().success(
-            function (response) {
-                $scope.list = response;
-            }
-        );
-    }
-
-    //分页
-    $scope.findPage = function (page, rows) {
-        tb_sellerService.findPage(page, rows).success(
-            function (response) {
-                $scope.list = response.rows;
-                $scope.paginationConf.totalItems = response.total;//更新总记录数
-            }
-        );
-    }
-
+    $scope.entity = {}
+    $scope.passwd = {}
     //查询实体
-    $scope.findOne = function (id) {
-        tb_sellerService.findOne(id).success(
+    $scope.findOne = function () {
+        tb_sellerService.findOne().success(
             function (response) {
                 $scope.entity = response;
             }
         );
     }
-
+    $scope.updatePasswd = function () {
+        if ($scope.passwd.old == null) {
+            alert("请输入旧密码！");
+            return;
+        }
+        if ($scope.passwd.new == null) {
+            alert("请输入新密码！");
+            return;
+        }
+        if ($scope.passwd.confirmNew == null) {
+            alert("请输入确认密码！");
+            return;
+        }
+        if ($scope.passwd.new !== $scope.passwd.confirmNew) {
+            alert("两次密码输入不相同！");
+            return;
+        }
+        if ($scope.passwd.old === $scope.passwd.new) {
+            alert("新密码与旧密码不能相同！");
+            return;
+        }
+        tb_sellerService.updatePasswd($scope.passwd).success(function (res) {
+            alert(res.message);
+            location.href="password.html"
+        })
+    }
     //保存
-    $scope.save = function () {
+    $scope.add = function () {
         tb_sellerService.add($scope.entity).success(
             function (response) {
                 if (response.success) {
@@ -46,18 +53,20 @@ app.controller('tb_sellerController', function ($scope, $controller, tb_sellerSe
             }
         );
     }
-
-
-    //批量删除
-    $scope.dele = function () {
-        //获取选中的复选框
-        tb_sellerService.dele($scope.selectIds).success(
+    //保存
+    $scope.update = function () {
+        tb_sellerService.update($scope.entity).success(
             function (response) {
                 if (response.success) {
-                    $scope.reloadList();//刷新列表
+                    //重新查询
+                    // $scope.reloadList();//重新加载
+                    alert("更新信息成功！")
+                } else {
+                    alert(response.message);
                 }
             }
         );
     }
+
 
 });	

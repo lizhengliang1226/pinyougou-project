@@ -3,6 +3,7 @@ package com.pinyougou.sellergoods.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.pinyougou.mapper.TbSpecificationOptionMapper;
@@ -11,6 +12,7 @@ import com.pinyougou.pageentity.PageResult;
 import com.pinyougou.pojo.TbSpecificationOption;
 import com.pinyougou.pojo.TbSpecificationOptionExample;
 import com.pinyougou.pojo.TbTypeTemplate;
+import com.pinyougou.pojo.TbTypeTemplateExample;
 import com.pinyougou.sellergoods.service.TypeTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
@@ -53,9 +55,16 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
      * 按分页查询
      */
     @Override
-    public PageResult findPage(int pageNum, int pageSize) {
+    public PageResult findPage(int pageNum, int pageSize,TbTypeTemplate tbTypeTemplate) {
         PageHelper.startPage(pageNum, pageSize);
-        Page<TbTypeTemplate> page = (Page<TbTypeTemplate>) tbTypeTemplateMapper.selectByExample(null);
+        TbTypeTemplateExample tbTypeTemplateExample=new TbTypeTemplateExample();
+        TbTypeTemplateExample.Criteria criteria = tbTypeTemplateExample.createCriteria();
+        if (ObjectUtil.isNotEmpty(tbTypeTemplate)){
+            if (ObjectUtil.isNotEmpty(tbTypeTemplate.getName())){
+                criteria.andNameLike("%"+tbTypeTemplate.getName()+"%");
+            }
+        }
+        Page<TbTypeTemplate> page = (Page<TbTypeTemplate>) tbTypeTemplateMapper.selectByExample(tbTypeTemplateExample);
         saveToRedis();
         return new PageResult(page.getTotal(), page.getResult());
     }

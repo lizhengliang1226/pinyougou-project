@@ -277,14 +277,16 @@ public class ItemSearchServiceImpl implements ItemSearchService {
             List<TbItem> tbItems = getItemListByGoodsId(goodsId);
             List<String> ids = new ArrayList<>();
             tbItems.forEach(item -> ids.add(String.valueOf(item.getId())));
-            solrTemplate.deleteById(ids);
-            solrTemplate.commit();
+            if (ids.size()>0){
+                solrTemplate.deleteById(ids);
+                solrTemplate.commit();
+            }
         }
     }
 
     /**
      * 通过goods_id字段查找所有的item
-     *
+     *查找spu对应的全部sku
      * @param goodsId
      * @return
      */

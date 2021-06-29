@@ -2,7 +2,7 @@
 
 # 品优购项目
 系统架构图
-![image](https://user-images.githubusercontent.com/75490362/117753589-50a1bb80-b24b-11eb-9a43-65efc9138490.png)
+![image-20210523233017836](C:\Users\17314\AppData\Roaming\Typora\typora-user-images\image-20210523233017836.png)
 
 
 ### SOA开发模式
@@ -15,12 +15,11 @@
 
 当需要调用的时候，去远程调用
 
-1. spring security使用的时候，user配置用户名和密码不能从propertise文件中读取，
-    要直接写在那，不然会出问题，登录页即使密码正确也会一直进不去
-
 ### Solr
 
 配置域：
+
+中文分析器
 
 ![image-20210428001154477](C:\Users\17314\AppData\Roaming\Typora\typora-user-images\image-20210428001154477.png)
 
@@ -72,3 +71,40 @@ cas退出之后需要重定向，修改配置文件cas-servlet.xml
 
 ![image-20210509155956356](C:\Users\17314\AppData\Roaming\Typora\typora-user-images\image-20210509155956356.png)
 
+#### 服务
+
+1. pinyougou-cart-service 购物车服务 9006
+
+2. pinyougou-content-service 广告服务 9002
+
+3. pinyougou-order-service 订单服务 9007
+
+4. pinyougou-page-service 静态页面服务 9003
+
+5. pinyougou-pay-service 支付服务 9008
+
+6. pinyougou-search-service 搜索服务 9004
+
+7. pinyougou-seckill-service 秒杀服务 9009
+
+8. pinyougou-sellergoods-service 运营商后台服务 9001
+
+9. pinyougou-sms-service 短信服务 9201
+
+10. pinyougou-user-service 用户服务 9005
+
+    
+
+#### web层
+
+1. pinyougou-cart-web 购物车系统 9106
+2. pinyougou-manager-web 运营商后台系统 9101
+3. pinyougou-portal-web 网站前台系统 9103
+4. pinyougou-search-web 搜索系统 9104
+5. pinyougou-seckill-web 秒杀系统 9109
+6. pinyougou-shop-web 商家后台管理系统 9102
+7. pinyougou-user-web 用户系统 9105
+
+### 安装jar包
+
+mvn install:install-file -Dfile=.\wxpay-sdk-0.0.3.jar -DgroupId=com.github.wxpay -DartifactId=wxpay-sdk -Dversion=0.0.3 -Dpackaging=jar -DgeneratePom=true

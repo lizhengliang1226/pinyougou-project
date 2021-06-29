@@ -14,7 +14,7 @@ app.controller('tb_specificationController' ,function($scope,$controller   ,tb_s
 	
 	//分页
 	$scope.findPage=function(page,rows){			
-		tb_specificationService.findPage(page,rows).success(
+		tb_specificationService.findPage(page,rows,$scope.searchEntity).success(
 			function(response){
 				$scope.list=response.rows;	
 				$scope.paginationConf.totalItems=response.total;//更新总记录数

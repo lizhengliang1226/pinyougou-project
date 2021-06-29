@@ -6,12 +6,14 @@ import com.pinyougou.pageentity.Result;
 import com.pinyougou.pojo.TbSeller;
 import com.pinyougou.sellergoods.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * controller
@@ -89,7 +91,9 @@ public class SellerController {
 	 */
 	@RequestMapping("/findOne")
 	public TbSeller findOne(String id){
-		return sellerService.findOne(id);
+		String sellerId = SecurityContextHolder.getContext().getAuthentication().getName();
+		TbSeller one = sellerService.findOne(sellerId);
+		return one;
 	}
 	
 	/**
@@ -107,6 +111,18 @@ public class SellerController {
 			return new Result(false, "删除失败");
 		}
 	}
-	
-	
+	@RequestMapping("/confirmPasswd")
+	public Result confirm(@RequestBody Map passwd){
+		String sellerId = SecurityContextHolder.getContext().getAuthentication().getName();
+		TbSeller seller = sellerService.findOne(sellerId);
+		boolean flag = bCryptPasswordEncoder.matches((CharSequence) passwd.get("old"), seller.getPassword());
+		if (flag){
+			String aNew = bCryptPasswordEncoder.encode((CharSequence) passwd.get("new"));
+			seller.setPassword(aNew);
+			sellerService.update(seller);
+			return new Result(true,"密码更新成功");
+		}else{
+			return new Result(false,"旧密码错误，更新失败！");
+		}
+	}
 }

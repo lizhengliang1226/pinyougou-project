@@ -69,5 +69,7 @@ app.controller("searchController", function ($scope, $location,searchService) {
         }
         return false;
     }
-
+    $scope.goToDetail=function (goodsId) {
+        
+    }
 })

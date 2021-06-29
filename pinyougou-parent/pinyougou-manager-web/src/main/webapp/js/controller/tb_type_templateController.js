@@ -14,12 +14,11 @@ app.controller('tb_type_templateController' ,function($scope,$controller   ,tb_t
 	
 	//分页
 	$scope.findPage=function(page,rows){
-		console.log("调用findPage")
-		tb_type_templateService.findPage(page,rows).success(
+		tb_type_templateService.findPage(page,rows,$scope.searchEntity).success(
 			function(response){
-				$scope.list=response.rows;	
+				$scope.list=response.rows;
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
-			}			
+			}
 		);
 	}
 	

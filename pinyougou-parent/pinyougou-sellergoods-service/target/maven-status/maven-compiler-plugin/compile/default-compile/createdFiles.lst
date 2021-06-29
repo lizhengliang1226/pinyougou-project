@@ -1,3 +1,4 @@
+com\pinyougou\sellergoods\service\impl\OrderServiceImpl.class
 com\pinyougou\sellergoods\service\impl\GoodsServiceImpl.class
 com\pinyougou\sellergoods\service\impl\BrandServiceImpl.class
 com\pinyougou\sellergoods\service\impl\SpecificationOptionServiceImpl.class

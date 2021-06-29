@@ -1,1 +1,9 @@
+com\pinyougou\cart\service\policy\MerchantNotExist.class
+com\pinyougou\cart\service\policy\MerchantExist$MerchandiseNotExist.class
 com\pinyougou\cart\service\impl\CartServiceImpl.class
+com\pinyougou\cart\service\policy\Policy.class
+com\pinyougou\cart\service\policy\PolicyFactory.class
+com\pinyougou\cart\service\policy\MerchantExist$MerchandiseExist.class
+com\pinyougou\cart\service\policy\AddMerchandisePolicy.class
+com\pinyougou\cart\service\policy\MerchantExist.class
+com\pinyougou\cart\service\policy\MerchandisePolicy.class

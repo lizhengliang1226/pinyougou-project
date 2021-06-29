@@ -27,7 +27,8 @@
     <script type="text/javascript" src="../js/controller/tb_contentController.js"></script>
 
 </head>
-<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-init="findContentCategoryIdList()" ng-controller="tb_contentController">
+<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-init="findContentCategoryIdList()"
+      ng-controller="tb_contentController">
 <!-- .box-body -->
 <div class="box-header with-border">
     <h3 class="box-title">内容管理</h3>
@@ -65,7 +66,8 @@
             <thead>
             <tr>
                 <th class="" style="padding-right:0px">
-                    <input id="selall" type="checkbox" class="icheckbox_square-blue">
+                    <input ng-click="selectAll($event,'.content-list')" id="selall" type="checkbox"
+                           class="icheckbox_square-blue">
                 </th>
                 <th class="sorting">内容类目ID</th>
                 <th class="sorting">内容标题</th>
@@ -78,16 +80,16 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="entity in list">
+            <tr ng-repeat="entity in list" class="content-list">
                 <td><input type="checkbox" ng-click="updateSelection($event,entity.id)"></td>
                 <td>{{entity.categoryId}}</td>
-                <td>{{entity.title}}</td>p'x
+                <td>{{entity.title}}</td>
                 <td>{{entity.url}}</td>
                 <td>
                     <img src="{{entity.pic}}" height="100" alt="">
                 </td>
                 <td>{{status[entity.status]}}
-                   </td>
+                </td>
 
                 <td>{{entity.sortOrder}}</td>
 
@@ -117,65 +119,41 @@
             </div>
             <div class="modal-body">
                 <input ng-model="entity.id" type="hidden">
-                <table class="table table-bordered table-striped" width="800px">
+                <form>
+                    <div class="form-group">
+                        <label class="control-label">内容类目ID：</label>
+                        <select class="form-control" ng-model="entity.categoryId"
+                                ng-options="item.id as item.name for item in contentCategoryIdList"></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">内容标题：</label>
+                        <input class="form-control" ng-model="entity.title" placeholder="内容标题"/></div>
+                    <div class="form-group">
+                        <label class="control-label">链接：</label>
+                        <input class="form-control" ng-model="entity.url" placeholder="链接"></div>
+                    <div class="form-group">
+                        <label class="control-label">上传图片：</label>
+                        <input type="file" id="file"/>
+                        <img src="{{entity.pic}}" alt="" width="100%" height="auto" style="margin-top: 10px;">
+                        <button ng-click="uploadImg()" style="width: 72px;margin-top: 10px;" class="btn btn-primary"
+                                type="button">
+                            上传
+                        </button>
 
-                    <tr>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">状态：</label>
+                        是否启用：<input type="checkbox" ng-model="entity.status" placeholder="状态" ng-true-value="1"
+                                    ng-false-value="0">
 
-                        <td>内容类目ID</td>
-
-                        <td>
-                            <select  class="form-control" ng-model="entity.categoryId" ng-options="item.id as item.name for item in contentCategoryIdList"></select>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <!--                        <th class="sorting">内容标题</th>-->
-                        <!--                        <th class="sorting">链接</th>-->
-                        <!--                        <th class="sorting">图片绝对路径</th>-->
-                        <!--                        <th class="sorting">状态</th>-->
-                        <!--                        <th class="sorting">排序</th>-->
-                        <td>内容标题</td>
-
-                        <td><input class="form-control" ng-model="entity.title" placeholder="内容标题"></td>
-
-                    </tr>
-                    <tr>
-
-                        <td>链接</td>
-
-                        <td><input class="form-control" ng-model="entity.url" placeholder="链接"></td>
-
-                    </tr>
-                    <tr>
-
-                        <td>上传图片</td>
-                        <td>
-                            <input type="file" id="file"/>
-                            <img src="{{entity.pic}}" alt="" width="100%" height="auto">
-                            <button ng-click="uploadImg()" style="width: 72px;margin-top: 10px;" class="btn btn-primary"
-                                    type="button">
-                                上传
-                            </button>
-                        </td>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">排序：</label>
+                        <input class="form-control" ng-model="entity.sortOrder" placeholder="排序">
 
 
-                    </tr>
-                    <tr>
-
-                        <td>状态</td>
-
-                        <td>是否启用：<input type="checkbox" ng-model="entity.status" placeholder="状态" ng-true-value="1" ng-false-value="0"></td>
-
-                    </tr>
-                    <tr>
-
-                        <td>排序</td>
-
-                        <td><input class="form-control" ng-model="entity.sortOrder" placeholder="排序"></td>
-
-                    </tr>
-
-                </table>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存</button>

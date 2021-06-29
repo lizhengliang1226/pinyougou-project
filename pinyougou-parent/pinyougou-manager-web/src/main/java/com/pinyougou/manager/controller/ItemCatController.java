@@ -19,7 +19,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 @RequestMapping("/tb_item_cat")
 public class ItemCatController {
 
-	@Reference
+	@Reference(timeout = 1000*60)
 	private ItemCatService itemCatService;
 	
 	/**

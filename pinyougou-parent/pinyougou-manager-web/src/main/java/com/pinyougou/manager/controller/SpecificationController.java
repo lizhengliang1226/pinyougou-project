@@ -39,8 +39,8 @@ public class SpecificationController {
 	 * @return
 	 */
 	@RequestMapping("/findPage")
-	public PageResult findPage(int page, int rows){
-		return specificationService.findPage(page, rows);
+	public PageResult findPage(int page, int rows,@RequestBody TbSpecification tbSpecification){
+		return specificationService.findPage(page, rows,tbSpecification);
 	}
 	
 	/**

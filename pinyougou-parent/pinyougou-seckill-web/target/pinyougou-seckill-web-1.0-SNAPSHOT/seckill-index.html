@@ -177,11 +177,11 @@ $(function(){
 					<div class='num'>
 						<div>已售{{((goods.num-goods.stockCount)*100/goods.num).toFixed(0)}}%</div>
 						<div class='progress'>
-							<div class='sui-progress progress-danger'><span style='width: 70%;' class='bar'></span></div>
+							<div class='sui-progress progress-danger'><span style='width: {{((goods.num-goods.stockCount)*100/goods.num).toFixed(0)}}%;' class='bar'></span></div>
 						</div>
 						<div>剩余<b class='owned'>{{goods.stockCount}}</b>件</div>
 					</div>
-					<a class='sui-btn btn-block btn-buy' href='seckill-item.html' target='_blank'>立即抢购</a>
+					<a class='sui-btn btn-block btn-buy' href='seckill-item.html#?id={{goods.id}}' target='_blank'>立即抢购</a>
 				</li>
 
 

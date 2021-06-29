@@ -164,7 +164,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public PageResult findPage(TbGoods tbGoods, int pageNum, int pageSize) {
+    public PageResult findPage( TbGoods tbGoods,int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         TbGoodsExample tbGoodsExample = new TbGoodsExample();
         TbGoodsExample.Criteria criteria = tbGoodsExample.createCriteria();
@@ -182,11 +182,10 @@ public class GoodsServiceImpl implements GoodsService {
             if (StrUtil.isNotEmpty(auditStatus)) {
                 criteria.andAuditStatusEqualTo(auditStatus);
             }
-
         }
         Page<TbGoods> page = (Page<TbGoods>) tbGoodsMapper.selectByExample(tbGoodsExample);
         List<TbGoods> result = page.getResult();
-        return new PageResult(page.getTotal(), page.getResult());
+        return new PageResult(page.getTotal(), result);
     }
 
     @Override
@@ -201,6 +200,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public void updateMarkStatus(Long[] ids, String status, String sellerId) {
         String itemStatus = "1";
+        //status-0 下架 status-1 上架
         itemStatus = status.equals("1") ? itemStatus : "2";
         for(Long id : ids) {
             //设置spu的状态

@@ -26,7 +26,7 @@
 	<script src="../js/controller/tb_goodsController.js"></script>
 </head>
 
-<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="tb_goodsController" ng-init="findItemCatList();searchEntity={auditStatus:0}">
+<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="tb_goodsController" ng-init="findItemCatList();searchEntity={auditStatus:'0'}">
   <!-- .box-body -->
                 
                     <div class="box-header with-border">
@@ -51,8 +51,8 @@
                             </div>
                             <div class="box-tools pull-right">
                                 <div class="has-feedback">
-                                    商品名称：<input >
-									<button class="btn btn-default" >查询</button>                                    
+                                    商品名称：<input ng-model="searchEntity.goodsName" >
+									<button class="btn btn-default" ng-click="reloadList()" >查询</button>
                                 </div>
                             </div>
                             <!--工具栏/-->
@@ -62,7 +62,7 @@
 			                      <thead>
 			                          <tr>
 			                              <th class="" style="padding-right:0px">
-			                                  <input id="selall" type="checkbox" class="icheckbox_square-blue">
+			                                  <input ng-click="selectAll($event,'.goods-list')"  id="selall" type="checkbox" class="icheckbox_square-blue">
 			                              </th> 
 										  <th class="sorting_asc">商品ID</th>
 									      <th class="sorting">商品名称</th>
@@ -75,7 +75,7 @@
 			                          </tr>
 			                      </thead>
 			                      <tbody>
-								  <tr ng-repeat="x in list">
+								  <tr ng-repeat="x in list" class="goods-list">
 									  <td><input  type="checkbox" ng-click="updateSelection($event,x.id)"></td>
 									  <td>{{x.id}}</td>
 									  <td>{{x.goodsName}}</td>
@@ -84,10 +84,9 @@
 									  <td>{{itemCatList[x.category2Id]}}</td>
 									  <td>{{itemCatList[x.category3Id]}}</td>
 									  <td>
-		                                  	<span>
+										  <span>
 		                                  		{{aduitStatus[x.auditStatus]}}
-		                                  	</span>
-
+										  </span>
 									  </td>
 									  <td class="text-center">
 										  <a href="goods_edit.html#?id={{x.id}}" class="btn bg-olive btn-xs">详情</a>

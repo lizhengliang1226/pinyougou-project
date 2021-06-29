@@ -39,8 +39,8 @@ public class TypeTemplateController {
 	 * @return
 	 */
 	@RequestMapping("/findPage")
-	public PageResult findPage(int page, int rows){
-		return typeTemplateService.findPage(page, rows);
+	public PageResult findPage(int page, int rows,TbTypeTemplate tbTypeTemplate){
+		return typeTemplateService.findPage(page, rows,tbTypeTemplate);
 	}
 	
 	/**

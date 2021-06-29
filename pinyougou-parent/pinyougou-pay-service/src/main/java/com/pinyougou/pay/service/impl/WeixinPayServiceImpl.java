@@ -84,7 +84,7 @@ partnerkey=8A627A4578ACE384017C997F12D68B23*/
         while(true) {
             x++;
             map = queryPayStatus(out_trade_no);
-            if (ObjectUtil.isEmpty(map) || x >= 2 || "SUCCESS".equals(map.get("trade_state"))) {
+            if (ObjectUtil.isEmpty(map) || x > 2 || "SUCCESS".equals(map.get("trade_state"))) {
                 break;
             }
             try {

@@ -13,14 +13,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @Date 2021.04.26-0:33
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring/applicationContext-redis.xml")
+@ContextConfiguration("classpath:spring/applicationContext-redis-cluster.xml")
 public class RedisHashTest {
     @Autowired
     private RedisTemplate redisTemplate;
     @Test
     public void testSetVal(){
-        redisTemplate.boundHashOps("map").put("name","lzl");
-        System.out.println(redisTemplate.boundHashOps("map").get("name"));
-        redisTemplate.boundHashOps("map").delete("name");
+        redisTemplate.boundValueOps("lzl").set("123456");
+        System.out.println(redisTemplate.boundValueOps("lzl").get());
     }
 }

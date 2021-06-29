@@ -6,8 +6,8 @@ app.service('tb_specificationService',function($http){
 		return $http.get('../tb_specification/findAll.do');		
 	}
 	//分页 
-	this.findPage=function(page,rows){
-		return $http.get('../tb_specification/findPage.do?page='+page+'&rows='+rows);
+	this.findPage=function(page,rows,searchEntity){
+		return $http.post('../tb_specification/findPage.do?page='+page+'&rows='+rows,searchEntity);
 	}
 	//查询实体
 	this.findOne=function(id){

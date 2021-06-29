@@ -57,6 +57,7 @@ app.controller('tb_goodsController', function ($scope, $controller, $location, t
         $scope.entity.goodsDesc.itemImages.splice(index, 1);
     }
     $scope.entity = {goodsDesc: {itemImages: [], specificationItems: []}}
+
     $scope.addImageEntity = function () {
         $scope.entity.goodsDesc.itemImages.push($scope.imgEntity)
     }
@@ -131,14 +132,6 @@ app.controller('tb_goodsController', function ($scope, $controller, $location, t
 
     //批量删除
     $scope.dele = function () {
-        //获取选中的复选框
-        // tb_goodsService.dele($scope.selectIds).success(
-        //     function (response) {
-        //         if (response.success) {
-        //             $scope.reloadList();//刷新列表
-        //         }
-        //     }
-        // );
         let res = confirm("确定删除吗？")
         if (res) {
             tb_goodsService.dele($scope.selectIds).success(function (data) {
@@ -200,6 +193,7 @@ app.controller('tb_goodsController', function ($scope, $controller, $location, t
     $scope.updateMarkStatus=function (status) {
         tb_goodsService.updateMarkStatus($scope.selectIds,status).success(function (res) {
             if(res.success){
+                alert(res.message)
                 $scope.reloadList()
                 $scope.selectIds=[]
             }else{

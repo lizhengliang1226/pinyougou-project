@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xmlns:cache="http://www.springframework.org/schema/cache"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc.xsd
+            http://www.springframework.org/schema/cache
+            http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+   <context:property-placeholder location="classpath*:properties/*.properties" />
+
+   <!-- redis 相关配置 -->
+   <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+     <property name="maxIdle" value="${redis.maxIdle}" />
+     <property name="maxWaitMillis" value="${redis.maxWait}" />
+     <property name="testOnBorrow" value="${redis.testOnBorrow}" />
+   </bean>
+
+   <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+       p:host-name="${redis.host}" p:port="${redis.port}" p:password="${redis.pass}" p:pool-config-ref="poolConfig"/>
+
+   <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+    	<property name="connectionFactory" ref="jedisConnectionFactory" />
+   </bean>
+
+</beans>
+
+
+
+
+
+
+
+
+# Redis settings
+# server IP
+redis.host=192.168.182.132
+# server port
+redis.port=6379
+# server pass
+redis.pass=
+# use dbIndex
+redis.database=0
+# \u63A7\u5236\u4E00\u4E2Apool\u6700\u591A\u6709\u591A\u5C11\u4E2A\u72B6\u6001\u4E3Aidle(\u7A7A\u95F2\u7684)\u7684jedis\u5B9E\u4F8B
+redis.maxIdle=300
+# \u8868\u793A\u5F53borrow(\u5F15\u5165)\u4E00\u4E2Ajedis\u5B9E\u4F8B\u65F6\uFF0C\u6700\u5927\u7684\u7B49\u5F85\u65F6\u95F4\uFF0C\u5982\u679C\u8D85\u8FC7\u7B49\u5F85\u65F6\u95F4(\u6BEB\u79D2)\uFF0C\u5219\u76F4\u63A5\u629B\u51FAJedisConnectionException\uFF1B
+redis.maxWait=3000
+# \u5728borrow\u4E00\u4E2Ajedis\u5B9E\u4F8B\u65F6\uFF0C\u662F\u5426\u63D0\u524D\u8FDB\u884Cvalidate\u64CD\u4F5C\uFF1B\u5982\u679C\u4E3Atrue\uFF0C\u5219\u5F97\u5230\u7684jedis\u5B9E\u4F8B\u5747\u662F\u53EF\u7528\u7684
+redis.testOnBorrow=true
+
+
+
+
+

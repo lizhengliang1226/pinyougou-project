@@ -7,6 +7,7 @@ F:\pingyougou_project\pinyougou-parent\pinyougou-dao\src\main\java\com\pinyougou
 F:\pingyougou_project\pinyougou-parent\pinyougou-dao\src\main\java\com\pinyougou\mapper\TbTypeTemplateMapper.java
 F:\pingyougou_project\pinyougou-parent\pinyougou-dao\src\main\java\com\pinyougou\mapper\TbContentCategoryMapper.java
 F:\pingyougou_project\pinyougou-parent\pinyougou-dao\src\main\java\com\pinyougou\mapper\TbFreightTemplateMapper.java
+F:\pingyougou_project\pinyougou-parent\pinyougou-dao\src\main\java\com\pinyougou\mapper\TbSeckillOrderMapper.java
 F:\pingyougou_project\pinyougou-parent\pinyougou-dao\src\main\java\com\pinyougou\mapper\TbSpecificationOptionMapper.java
 F:\pingyougou_project\pinyougou-parent\pinyougou-dao\src\main\java\com\pinyougou\mapper\TbAddressMapper.java
 F:\pingyougou_project\pinyougou-parent\pinyougou-dao\src\main\java\com\pinyougou\mapper\TbSpecificationMapper.java
@@ -18,3 +19,4 @@ F:\pingyougou_project\pinyougou-parent\pinyougou-dao\src\main\java\com\pinyougou
 F:\pingyougou_project\pinyougou-parent\pinyougou-dao\src\main\java\com\pinyougou\mapper\TbOrderItemMapper.java
 F:\pingyougou_project\pinyougou-parent\pinyougou-dao\src\main\java\com\pinyougou\mapper\TbUserMapper.java
 F:\pingyougou_project\pinyougou-parent\pinyougou-dao\src\main\java\com\pinyougou\mapper\TbPayLogMapper.java
+F:\pingyougou_project\pinyougou-parent\pinyougou-dao\src\main\java\com\pinyougou\mapper\TbSeckillGoodsMapper.java
